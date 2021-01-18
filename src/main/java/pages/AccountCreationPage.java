@@ -10,18 +10,7 @@ import org.openqa.selenium.support.ui.Select;
 import java.util.Map;
 
 @Getter
-public class AccountCreationPage {
-    WebDriver driver;
-
-    public AccountCreationPage(WebDriver driver) {
-        this.driver = driver;
-
-        PageFactory.initElements(driver, this);
-        dropDownDay = new Select(dayOfBirth);
-        dropDownMonth = new Select(monthOfBirth);
-        dropDownYear = new Select(yearOfBirth);
-        stateName = new Select(state);
-    }
+public class AccountCreationPage extends BasePageObject{
 
     @FindBy(xpath = "//input[@id='id_gender1']")
     private WebElement genderRadioBtn;
@@ -74,6 +63,14 @@ public class AccountCreationPage {
 
     @FindBy(id = "submitAccount")
     private WebElement submitAccount;
+
+    public AccountCreationPage(WebDriver driver) {
+        super(driver);
+        dropDownDay = new Select(dayOfBirth);
+        dropDownMonth = new Select(monthOfBirth);
+        dropDownYear = new Select(yearOfBirth);
+        stateName = new Select(state);
+    }
 
     public void enterFirstName(String firstN) {
         firstName.sendKeys(firstN);

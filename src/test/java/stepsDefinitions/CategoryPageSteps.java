@@ -21,7 +21,8 @@ public class CategoryPageSteps extends AbstractStepDefinitions{
     public void clicksOnAnItem() {
         clickOnElement(categoryPage.getListBtn());
         clickOnElement(categoryPage.getMoreBtn());
-        TakeScreens.takeScreenshot(testContext.getWebDriverManager().getDriver());
+        TakeScreens.takeScreenshot(testContext.getWebDriverManager().getDriver(),
+                testContext.getTakeScreens().getScreenPath());
         log.info("User clicks on an item");
     }
 }

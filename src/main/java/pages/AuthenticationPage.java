@@ -4,16 +4,10 @@ import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
+
 
 @Getter
-public class AuthenticationPage {
-WebDriver driver;
-
-    public AuthenticationPage (WebDriver driver){
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
-    }
+public class AuthenticationPage extends BasePageObject {
 
    @FindBy(xpath = "//h1[@class='page-heading']")
     private WebElement pageHeader;
@@ -32,6 +26,10 @@ WebDriver driver;
 
     @FindBy(id = "SubmitLogin")
     private WebElement submitLogin;
+
+    public AuthenticationPage (WebDriver driver){
+        super(driver);
+    }
 
     public String getHeader() {
         return pageHeader.getText();

@@ -22,7 +22,7 @@ public class WebDriverManager {
     }
 
     public WebDriver getDriver() {
-        if (driver == null){
+        if (driver == null) {
             driver = createDriver();
         }
         return driver;
@@ -57,14 +57,8 @@ public class WebDriverManager {
     }
 
     public void closeDiver() {
-        switch (driverType) {
-            case FIREFOX:
-                driver.quit();
-                break;
-            case CHROME:
-                driver.close();
-                break;
-        }
+        driver.close();
+        driver.quit();
     }
 }
 

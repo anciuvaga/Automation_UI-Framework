@@ -10,13 +10,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Getter
-public class CheckoutPage {
-    WebDriver driver;
-
-    public CheckoutPage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
-    }
+public class CheckoutPage extends BasePageObject {
 
     @FindBy(linkText = "Blouse")
     private WebElement item;
@@ -54,6 +48,10 @@ public class CheckoutPage {
     @FindBy(xpath = "//div[@class='box order-confirmation']")
     private WebElement orderReference;
 
+    public CheckoutPage(WebDriver driver) {
+       super(driver);
+    }
+
     public String getItemName() {
         return item.getText();
     }
@@ -81,5 +79,4 @@ public class CheckoutPage {
         }
         return reference;
     }
-
 }

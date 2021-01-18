@@ -1,21 +1,15 @@
 package pages;
 
-import dataProvider.ConfigFileReader;
 import lombok.Getter;
 import managers.FileReaderManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 @Getter
-public class HomePage {
-    WebDriver driver;
+public class HomePage extends BasePageObject {
 
-    public HomePage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
-    }
+    WebDriver driver;
 
     @FindBy(xpath = "//a[@class='login']")
     private WebElement signInBtn;
@@ -23,8 +17,13 @@ public class HomePage {
     @FindBy(xpath = "//a[@class='button ajax_add_to_cart_button btn btn-default']")
     private WebElement addToCartBtnHome;
 
+    public HomePage(WebDriver driver) {
+       super(driver);
+       this.driver=driver;
+    }
+
     public void navigateToHomePage() {
-        driver.get(FileReaderManager.getInstance().getConfigFileReader().getWebsiteURL());
+        getDriver().get(FileReaderManager.getInstance().getConfigFileReader().getWebsiteURL());
     }
 
 }

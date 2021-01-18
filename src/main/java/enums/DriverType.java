@@ -1,23 +1,25 @@
 package enums;
 
-public enum DriverType {
-    FIREFOX,
-    CHROME,
-    INTERNET_EXPLORER;
+import java.util.stream.Stream;
 
-    public static DriverType getByName(String browserName) {
-            switch (browserName) {
-                case "chrome":
-                    return DriverType.CHROME;
-                case "firefox":
-                    return DriverType.FIREFOX;
-                case "iexplorer":
-                    return DriverType.INTERNET_EXPLORER;
-                default:
-                    throw new RuntimeException("Browser Name Key value in configuration.properties is not matched :" + browserName);
-            }
-        }
+public enum DriverType {
+    FIREFOX("firefox"),
+    CHROME("chrome"),
+    INTERNET_EXPLORER("iexplorer");
+
+    private String driverType;
+
+    DriverType(String driverType) {
+        this.driverType = driverType;
     }
 
 
+    public static DriverType getByName(String browserName) {
+        return Stream.of(DriverType.values()).filter(x -> x.driverType.equals(browserName)).findFirst()
+                .orElseThrow(() ->
+                        new RuntimeException("Browser name key value in configuration.properties is not matched :" + browserName));
+
+    }
+
+}
 

@@ -14,13 +14,12 @@ import java.io.File;
 @CucumberOptions(
         features = "src/test/resources/featureFiles",
         glue = {"stepsDefinitions","hooks"},
-        tags = {"@priority-1, @priority-2, @priority-3"},
+        tags = {"~@priority-1", "@priority-2", "~@priority-3"},
         plugin = {"pretty", "json:target/cucumber-reports/Cucumber.json",
-                "junit:target/cucumber-reports/Cucumber.xml", "com.cucumber.listener.ExtentCucumberFormatter:target/cucumber-reports/report.html" },
+                "junit:target/cucumber-reports/Cucumber.xml", "com.cucumber.listener.ExtentCucumberFormatter:test-output/cucumber-reports/report.html" },
         monochrome = true,
         dryRun = false,
         strict = false
-
 )
 
 public class TestRunner {

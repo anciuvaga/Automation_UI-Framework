@@ -9,14 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 import java.util.Map;
 
 @Getter
-public class MyAccountPage {
-
-    WebDriver driver;
-
-    public MyAccountPage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
-    }
+public class MyAccountPage extends BasePageObject {
 
     @FindBy(xpath = "//span[contains(text(),'John Dow')]")
     private WebElement userAcctName;
@@ -53,6 +46,10 @@ public class MyAccountPage {
 
     @FindBy(xpath = "//table[@class='table table-bordered']//tbody/tr[1]//td[2]//label")
     private WebElement productName;
+
+    public MyAccountPage(WebDriver driver) {
+        super(driver);
+    }
 
     public String getAccountName() {
         return userAcctName.getText();

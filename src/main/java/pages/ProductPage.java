@@ -10,19 +10,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 @Getter
-public class ProductPage {
-
-    WebDriver driver;
-
-    public ProductPage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
-        try {
-            size = new Select(driver.findElement(By.id("group_1")));
-        } catch (Exception e) {
-
-        }
-    }
+public class ProductPage extends BasePageObject{
 
     @FindBy(xpath = "//i[@class='icon-plus']")
     private WebElement addQuantityBtn;
@@ -40,6 +28,15 @@ public class ProductPage {
     @FindBy(xpath = "//td[@class='cart_description']//p[@class='product-name']")
     private WebElement productName;
 
+    public ProductPage(WebDriver driver) {
+       super(driver);
+        try {
+            size = new Select(sizeDropDown);
+        } catch (Exception e) {
+
+        }
+    }
+
     public void selectSize() {
         size.selectByValue("2");
     }
@@ -48,5 +45,4 @@ public class ProductPage {
         System.out.println(productName.getText());
         return productName.getText();
     }
-
 }

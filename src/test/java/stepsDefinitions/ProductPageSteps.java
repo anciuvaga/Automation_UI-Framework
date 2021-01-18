@@ -28,28 +28,29 @@ public class ProductPageSteps extends AbstractStepDefinitions {
     }
 
     @When("^user choose necessary attributes$")
-    public void userChooseNecessaryAttributes() throws InterruptedException {
+    public void userChooseNecessaryAttributes() {
         clickOnElement(productPage.getAddQuantityBtn());
         clickOnElement(productPage.getSizeDropDown());
         productPage.selectSize();
         clickOnElement(productPage.getAddToCartBtn());
         testContext.waitForVisibility(productPage.getProceedToCheckoutBtn());
         clickOnElement(productPage.getProceedToCheckoutBtn());
-        TakeScreens.takeScreenshot(testContext.getWebDriverManager().getDriver());
+        TakeScreens.takeScreenshot(testContext.getWebDriverManager().getDriver(),
+                testContext.getTakeScreens().getScreenPath());
         log.info("User choose necessary attributes");
     }
 
-    @When("^an item is been added to the shoppingCart$")
+    @When("^an item has been added to the shoppingCart$")
     public void itemHasBeenAddedToShoppingCart() {
         clickOnElement(myAccountPage.getCategory());
         clickOnElement(categoryPage.getListBtn());
         clickOnElement(categoryPage.getAddToCartBtn());
         testContext.waitForVisibility(productPage.getProceedToCheckoutBtn());
         clickOnElement(productPage.getProceedToCheckoutBtn());
-
         String productName = productPage.getProductName();
         testContext.getScenarioContext().setContext(Context.PRODUCT_NAME, productName);
-        TakeScreens.takeScreenshot(testContext.getWebDriverManager().getDriver());
+        TakeScreens.takeScreenshot(testContext.getWebDriverManager().getDriver(),
+                testContext.getTakeScreens().getScreenPath());
         log.info("An item is been added to the shoppingCar");
     }
 }

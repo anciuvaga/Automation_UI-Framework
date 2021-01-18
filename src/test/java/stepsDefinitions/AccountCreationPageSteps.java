@@ -33,16 +33,9 @@ public class AccountCreationPageSteps extends AbstractStepDefinitions {
         clickOnElement(accountCreationPage.getNewsletter());
         clickOnElement(accountCreationPage.getState());
         accountCreationPage.selectState();
-        TakeScreens.takeScreenshot(testContext.getWebDriverManager().getDriver());
+        TakeScreens.takeScreenshot(testContext.getWebDriverManager().getDriver(),
+                testContext.getTakeScreens().getScreenPath());
         log.info("User fills in personal information details");
-    }
-
-    @When("^user clicks on 'Register' button$")
-    public void userClicksOnRegisterButton() {
-        clickOnElement(accountCreationPage.getSubmitAccount());
-        TakeScreens.takeScreenshot(testContext.getWebDriverManager().getDriver());
-        log.info("User clicks on 'Register' button");
-
     }
 
 }

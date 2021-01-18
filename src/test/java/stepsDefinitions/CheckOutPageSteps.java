@@ -26,14 +26,16 @@ public class CheckOutPageSteps extends AbstractStepDefinitions{
     public void itemsAreAddedToCart() {
         Assert.assertEquals("Item name is  not: \"Blouse\"",
                 "Blouse", checkoutPage.getItemName());
-        TakeScreens.takeScreenshot(testContext.getWebDriverManager().getDriver());
+        TakeScreens.takeScreenshot(testContext.getWebDriverManager().getDriver(),
+                testContext.getTakeScreens().getScreenPath());
         log.info("User adds items to cart");
     }
 
     @When("^an item is removed from shoppingCart$")
     public void anItemIsRemovedFromShoppingCart() {
         clickOnElement(checkoutPage.getRemoveBtn());
-      TakeScreens.takeScreenshot(testContext.getWebDriverManager().getDriver());
+        TakeScreens.takeScreenshot(testContext.getWebDriverManager().getDriver(),
+                testContext.getTakeScreens().getScreenPath());
         log.info("User removes an  item from the cart");
     }
 
@@ -45,7 +47,8 @@ public class CheckOutPageSteps extends AbstractStepDefinitions{
         act.moveToElement(checkoutPage.getSummaryProductsQuantity()).perform();
         Assert.assertEquals("Item's amount is not: \"1\"", "1",
                 checkoutPage.getSummaryProductQuantityText());
-       TakeScreens.takeScreenshot(testContext.getWebDriverManager().getDriver());
+        TakeScreens.takeScreenshot(testContext.getWebDriverManager().getDriver(),
+                testContext.getTakeScreens().getScreenPath());
         log.info("Correct items amount is present in the shoppingCart");
     }
 
@@ -56,21 +59,17 @@ public class CheckOutPageSteps extends AbstractStepDefinitions{
         clickOnElement(checkoutPage.getTermsOfServiceCheckbox());
         clickOnElement(checkoutPage.getProcessCarrierBtn());
         clickOnElement(checkoutPage.getCheckMethod());
-        TakeScreens.takeScreenshot(testContext.getWebDriverManager().getDriver());
+        TakeScreens.takeScreenshot(testContext.getWebDriverManager().getDriver(),
+                testContext.getTakeScreens().getScreenPath());
         log.info("User processes checkout information");
-    }
-
-    @When("^'I confirm my order' btn is pressed$")
-    public void IconfirmMyOrderBtnIsPressed() {
-        clickOnElement(checkoutPage.getConfirmBtn());
-        TakeScreens.takeScreenshot(testContext.getWebDriverManager().getDriver());
-        log.info("'I confirm my order' btn is pressed");
     }
 
     @Then("^successful confirmation message is displayed$")
     public void successfulConfirmationMessageIsDisplayed() {
-        Assert.assertTrue("Successful confirmation message is not displayed",checkoutPage.successfulAlertMessage());
-        TakeScreens.takeScreenshot(testContext.getWebDriverManager().getDriver());
+        Assert.assertTrue("Successful confirmation message is not displayed",
+                checkoutPage.successfulAlertMessage());
+        TakeScreens.takeScreenshot(testContext.getWebDriverManager().getDriver(),
+                testContext.getTakeScreens().getScreenPath());
         log.info("Successful confirmation message is displayed");
     }
 
@@ -79,7 +78,8 @@ public class CheckOutPageSteps extends AbstractStepDefinitions{
         String orderRef = checkoutPage.getOrderReference();
         testContext.getScenarioContext().setContext(Context.ORDER_REF, orderRef);
         clickOnElement(checkoutPage.getBackToOrdersBtn());
-        TakeScreens.takeScreenshot(testContext.getWebDriverManager().getDriver());
+        TakeScreens.takeScreenshot(testContext.getWebDriverManager().getDriver(),
+                testContext.getTakeScreens().getScreenPath());
         log.info("User goes back to orders");
     }
 }

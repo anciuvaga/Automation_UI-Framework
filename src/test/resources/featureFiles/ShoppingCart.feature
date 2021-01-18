@@ -2,8 +2,9 @@ Feature: ShoppingCart Functionality
 
   Background:
     Given user is on HomePage
+    And user clicks on 'Sign In' generic button
     And user is logged in successfully
-      | EmailAddress | persona4@gmail.com |
+      | EmailAddress | personal4463@gmail.com |
       | Password     | VVV123Fa          |
 
   @priority-2
@@ -19,14 +20,15 @@ Feature: ShoppingCart Functionality
   @priority-2
   Scenario: Checkout
 
-    When an item is been added to the shoppingCart
+    When an item has been added to the shoppingCart
     And user process checkout information
-    And 'I confirm my order' btn is pressed
+    And user clicks on 'I confirm my order' generic button
     Then successful confirmation message is displayed
     When user goes back to orders
     Then order reference is present in order history
     When user clicks on order reference
     Then correct item name is present in order details table
+
 
 
 

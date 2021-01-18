@@ -4,16 +4,9 @@ import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 @Getter
-public class CategoryPage {
-    WebDriver driver;
-
-    public CategoryPage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
-    }
+public class CategoryPage extends BasePageObject {
 
     @FindBy(xpath = "(//ul[@class='product_list row list']/li[2])//a[@class='button lnk_view btn btn-default']")
     private WebElement moreBtn;
@@ -23,5 +16,10 @@ public class CategoryPage {
 
     @FindBy(xpath = "//i[@class='icon-th-list']")
     private WebElement listBtn;
+
+    public CategoryPage(WebDriver driver) {
+      super(driver);
+    }
+
 
 }

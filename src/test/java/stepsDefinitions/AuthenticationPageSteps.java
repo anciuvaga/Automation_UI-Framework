@@ -23,8 +23,10 @@ public class AuthenticationPageSteps extends AbstractStepDefinitions{
 
     @Then("^user is redirected on 'AutheticationPage'$")
     public void userIsRedirectedOnAutheticationPage() {
-        Assert.assertEquals("Page header name is not: AUTHENTICATION", "AUTHENTICATION", authenticationPage.getHeader().toUpperCase());
-        TakeScreens.takeScreenshot(testContext.getWebDriverManager().getDriver());
+        Assert.assertEquals("Page header name is not: AUTHENTICATION",
+                "AUTHENTICATION", authenticationPage.getHeader().toUpperCase());
+        TakeScreens.takeScreenshot(testContext.getWebDriverManager().getDriver(),
+                testContext.getTakeScreens().getScreenPath());
         log.info("User is redirected on 'AutheticationPage'");
 
     }
@@ -32,15 +34,9 @@ public class AuthenticationPageSteps extends AbstractStepDefinitions{
     @When("^user enter '(.*)' address$")
     public void userEnterEmailAddress(String email) {
         authenticationPage.inputEmail(email);
-        TakeScreens.takeScreenshot(testContext.getWebDriverManager().getDriver());
+        TakeScreens.takeScreenshot(testContext.getWebDriverManager().getDriver(),
+                testContext.getTakeScreens().getScreenPath());
         log.info("User enter email address");
-    }
-
-    @When("^user clicks on 'Create an account' button$")
-    public void userClicksOnCreateAnAccountButton() {
-        clickOnElement(authenticationPage.getCreateAccountBtn());
-        TakeScreens.takeScreenshot(testContext.getWebDriverManager().getDriver());
-        log.info("User clicks on 'Create an account' button");
     }
 
     @When("^user enters his credentials$")
@@ -48,7 +44,8 @@ public class AuthenticationPageSteps extends AbstractStepDefinitions{
         sendKeysToField(authenticationPage.getEmailAuthentication(), credentials.get("EmailAddress"));
         sendKeysToField(authenticationPage.getPasswordAuthentication(), credentials.get("Password"));
         clickOnElement(authenticationPage.getSubmitLogin());
-        TakeScreens.takeScreenshot(testContext.getWebDriverManager().getDriver());
+        TakeScreens.takeScreenshot(testContext.getWebDriverManager().getDriver(),
+                testContext.getTakeScreens().getScreenPath());
         log.info("User enters his credentials");
     }
 
@@ -57,7 +54,8 @@ public class AuthenticationPageSteps extends AbstractStepDefinitions{
         String autheticationPageURL = "http://automationpractice.com/index.php?controller=authentication&back=my-account";
         Assert.assertEquals("User is not redirected to the Authentication Page",
                 autheticationPageURL, testContext.getWebDriverManager().getDriver().getCurrentUrl());
-        TakeScreens.takeScreenshot(testContext.getWebDriverManager().getDriver());
+        TakeScreens.takeScreenshot(testContext.getWebDriverManager().getDriver(),
+                testContext.getTakeScreens().getScreenPath());
         log.info("User is logged out successfully");
     }
 
@@ -66,8 +64,8 @@ public class AuthenticationPageSteps extends AbstractStepDefinitions{
         sendKeysToField(authenticationPage.getEmailAuthentication(), credentials.get("EmailAddress"));
         sendKeysToField(authenticationPage.getPasswordAuthentication(), credentials.get("Password"));
         clickOnElement(authenticationPage.getSubmitLogin());
-        TakeScreens.takeScreenshot(testContext.getWebDriverManager().getDriver());
+        TakeScreens.takeScreenshot(testContext.getWebDriverManager().getDriver(),
+                testContext.getTakeScreens().getScreenPath());
         log.info("User is logged in successfully");
-
     }
 }
