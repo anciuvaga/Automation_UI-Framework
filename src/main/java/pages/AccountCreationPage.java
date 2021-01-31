@@ -5,7 +5,6 @@ import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 import java.util.Map;
 
@@ -62,7 +61,7 @@ public class AccountCreationPage extends BasePageObject{
     private WebElement aliasAddress;
 
     @FindBy(id = "submitAccount")
-    private WebElement submitAccount;
+    private WebElement register;
 
     public AccountCreationPage(WebDriver driver) {
         super(driver);
@@ -133,7 +132,20 @@ public class AccountCreationPage extends BasePageObject{
             enterMobilePhone(userInfo.get("MobilePhone"));
             enterAliasAddress(userInfo.get("AddressAlias"));
         }
-
     }
 
+    public void completeRegistration() {
+        genderRadioBtn.click();
+        dayOfBirth.click();
+        selectDay();
+        monthOfBirth.click();
+        selectMonth();
+        yearOfBirth.click();
+        selectYear();
+        optin.click();
+        newsletter.click();
+        state.click();
+        selectState();
+    }
 }
+

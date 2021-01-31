@@ -1,4 +1,5 @@
 package stepsDefinitions;
+
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -6,11 +7,13 @@ import helpers.TestContext;
 import lombok.extern.log4j.Log4j;
 import org.junit.Assert;
 import pages.AuthenticationPage;
-import utils.TakeScreens;
+import actionsUtils.TakeScreens;
 import java.util.Map;
+import static actionsUtils.Actions.clickOnElement;
+import static actionsUtils.Actions.sendKeysToField;
 
 @Log4j
-public class AuthenticationPageSteps extends AbstractStepDefinitions{
+public class AuthenticationPageSteps {
 
     TestContext testContext;
     AuthenticationPage authenticationPage;

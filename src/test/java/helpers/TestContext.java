@@ -1,29 +1,24 @@
 package helpers;
 
-import managers.FileReaderManager;
 import managers.PageObjectManager;
 import managers.WebDriverManager;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import utils.TakeScreens;
+import actionsUtils.TakeScreens;
+import actionsUtils.WaitUtils;
 
 public class TestContext {
 
     private WebDriverManager webDriverManager;
     private PageObjectManager pageObjectManager;
     private ScenarioContext scenarioContext;
-    private WebDriverWait wait;
     private TakeScreens takeScreens;
+    private WaitUtils waitUtils;
 
     public TestContext() {
         webDriverManager = new WebDriverManager();
-        takeScreens = new TakeScreens();
         pageObjectManager = new PageObjectManager(webDriverManager.getDriver());
         scenarioContext = new ScenarioContext();
-        wait = new WebDriverWait(webDriverManager.getDriver(), FileReaderManager.getInstance().getConfigFileReader()
-                .getImplicitWait());
+        takeScreens = new TakeScreens();
+        waitUtils = new WaitUtils(webDriverManager.getDriver());
     }
     public TakeScreens getTakeScreens() {
                return takeScreens;
@@ -33,19 +28,15 @@ public class TestContext {
         return webDriverManager;
     }
 
-    public  PageObjectManager getPageObjectManager() {
-        return pageObjectManager;
-    }
+    public  PageObjectManager getPageObjectManager() { return pageObjectManager; }
 
     public ScenarioContext getScenarioContext() {
         return  scenarioContext;
     }
 
-    public void waitForVisibility(WebElement element) {
-      wait.until(ExpectedConditions.visibilityOf(element));
+    public WaitUtils getWaitUtils() {
+        return waitUtils;
     }
 
-    public void waitForVisibilityOfElementLocated(By xpath) {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(xpath));
-    }
 }
+

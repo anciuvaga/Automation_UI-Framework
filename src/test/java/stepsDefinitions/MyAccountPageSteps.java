@@ -5,25 +5,30 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import enums.Context;
 import helpers.TestContext;
+import actionsUtils.WaitUtils;
 import lombok.extern.log4j.Log4j;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import pages.CheckoutPage;
 import pages.MyAccountPage;
-import utils.TakeScreens;
+import actionsUtils.TakeScreens;
+
+import static actionsUtils.Actions.clickOnElement;
 
 @Log4j
-public class MyAccountPageSteps extends AbstractStepDefinitions{
+public class MyAccountPageSteps {
 
     TestContext testContext;
     MyAccountPage myAccountPage;
     CheckoutPage checkoutPage;
+    WaitUtils waitUtils;
 
     public MyAccountPageSteps(TestContext context) {
         testContext = context;
         myAccountPage = testContext.getPageObjectManager().getMyAccountPage();
-        checkoutPage = testContext.getPageObjectManager().getCheckOutPage();
+        checkoutPage = testContext.getPageObjectManager().getCheckoutPage();
+        waitUtils = testContext.getWaitUtils();
     }
 
     @Then("^new account is created for the user$")
@@ -37,9 +42,9 @@ public class MyAccountPageSteps extends AbstractStepDefinitions{
 
     @Then("^user lands on 'MyAccount' page$")
     public void user_lands_on_MyAccount_page() {
-        String myAccoutUrl = "http://automationpractice.com/index.php?controller=my-account";
-        Assert.assertEquals("User has not landed on \"MyAccount page\"", myAccoutUrl,
-                testContext.getWebDriverManager().getDriver().getCurrentUrl());
+        String pageTitle = "My account - My Store";
+        Assert.assertEquals("Page title is not\"My account - My Store\"", pageTitle,
+                testContext.getWebDriverManager().getDriver().getTitle());
         TakeScreens.takeScreenshot(testContext.getWebDriverManager().getDriver(),
                 testContext.getTakeScreens().getScreenPath());
         log.info("User lands on 'MyAccount' page");
@@ -53,14 +58,6 @@ public class MyAccountPageSteps extends AbstractStepDefinitions{
                 testContext.getTakeScreens().getScreenPath());
         log.info("User selects a category");
 
-    }
-
-    @When("^user goes to 'My Personal Information'$")
-    public void goes_to_My_Personal_Information() {
-        clickOnElement(myAccountPage.getInfoTab());
-        TakeScreens.takeScreenshot(testContext.getWebDriverManager().getDriver(),
-                testContext.getTakeScreens().getScreenPath());
-        log.info("User selects a category");
     }
 
     @When("^password is updated$")
@@ -105,7 +102,7 @@ public class MyAccountPageSteps extends AbstractStepDefinitions{
     @Then("^correct item name is present in order details table$")
     public void correctItemNameIsPresentInOrderDetailsTable() {
         String productName = testContext.getScenarioContext().getContext(Context.PRODUCT_NAME);
-        testContext.waitForVisibilityOfElementLocated(By.xpath("//table[@class='table table-bordered']//tbody/tr[1]//td[2]//label"));
+        waitUtils.waitForVisibilityOfElementLocated(By.xpath("//table[@class='table table-bordered']//tbody/tr[1]//td[2]//label"));
         Assert.assertTrue("Corect product name: \"Faded Short Sleeve T-shirts\" is not present in order details ",
                 myAccountPage.getProductName().contains(productName));
         TakeScreens.takeScreenshot(testContext.getWebDriverManager().getDriver(),

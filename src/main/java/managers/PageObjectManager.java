@@ -42,7 +42,7 @@ public class PageObjectManager {
         return (productPage == null) ? productPage = new ProductPage(driver) : productPage;
     }
 
-    public CheckoutPage getCheckOutPage() {
+    public CheckoutPage getCheckoutPage() {
         return (checkOutPage == null) ? checkOutPage = new CheckoutPage(driver) : checkOutPage;
     }
 }

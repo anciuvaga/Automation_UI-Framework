@@ -16,7 +16,7 @@ public class AuthenticationPage extends BasePageObject {
     private WebElement emailCreate;
 
     @FindBy(id = "SubmitCreate")
-    private WebElement createAccountBtn;
+    private WebElement createAccount;
 
     @FindBy(id = "email")
     private WebElement emailAuthentication;
@@ -38,5 +38,5 @@ public class AuthenticationPage extends BasePageObject {
     public void inputEmail(String email) {
         emailCreate.sendKeys(email);
     }
-
 }
+

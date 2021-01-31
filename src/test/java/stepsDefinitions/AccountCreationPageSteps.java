@@ -5,10 +5,10 @@ import cucumber.api.java.en.When;
 import helpers.TestContext;
 import lombok.extern.log4j.Log4j;
 import pages.AccountCreationPage;
-import utils.TakeScreens;
+import actionsUtils.TakeScreens;
 
 @Log4j
-public class AccountCreationPageSteps extends AbstractStepDefinitions {
+public class AccountCreationPageSteps {
 
     TestContext testContext;
     AccountCreationPage accountCreationPage;
@@ -22,17 +22,7 @@ public class AccountCreationPageSteps extends AbstractStepDefinitions {
     @When("^user fills in personal information details$")
     public void userFillsInPersonalInformationDetails(DataTable dataTable) {
         accountCreationPage.fillInPersonalDetails(dataTable);
-        clickOnElement(accountCreationPage.getGenderRadioBtn());
-        clickOnElement(accountCreationPage.getDayOfBirth());
-        accountCreationPage.selectDay();
-        clickOnElement(accountCreationPage.getMonthOfBirth());
-        accountCreationPage.selectMonth();
-        clickOnElement(accountCreationPage.getYearOfBirth());
-        accountCreationPage.selectYear();
-        clickOnElement(accountCreationPage.getOptin());
-        clickOnElement(accountCreationPage.getNewsletter());
-        clickOnElement(accountCreationPage.getState());
-        accountCreationPage.selectState();
+        accountCreationPage.completeRegistration();
         TakeScreens.takeScreenshot(testContext.getWebDriverManager().getDriver(),
                 testContext.getTakeScreens().getScreenPath());
         log.info("User fills in personal information details");

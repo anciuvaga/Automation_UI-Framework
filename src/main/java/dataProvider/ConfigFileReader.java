@@ -60,7 +60,8 @@ public class ConfigFileReader {
         if (configProperty != null){
             return configProperty;
         }else{
-            throw new RuntimeException("Configuration property not specified in the configurations.properties " + propertyFilePath);
+            throw new RuntimeException("Configuration property: " +configProperty +
+                    " not specified in the configurations.properties " + propertyFilePath);
         }
     }
 }

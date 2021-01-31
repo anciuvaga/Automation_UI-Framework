@@ -15,16 +15,16 @@ public class MyAccountPage extends BasePageObject {
     private WebElement userAcctName;
 
     @FindBy(xpath = "//a[@class ='logout']")
-    private WebElement signOutBtn;
+    private WebElement signOut;
 
     @FindBy(xpath = "//ul[@class='sf-menu clearfix menu-content sf-js-enabled sf-arrows']/li[1]/a[1]")
     private WebElement category;
 
     @FindBy(css = ".header_user_info > .account")
-    private WebElement userAccount;
+    private WebElement account;
 
     @FindBy(xpath = "//ul[@class='myaccount-link-list']/li[4]/a[1]")
-    private WebElement infoTab;
+    private WebElement myPersonalInformation;
 
     @FindBy(id = "old_passwd")
     private WebElement oldPass;
@@ -36,7 +36,7 @@ public class MyAccountPage extends BasePageObject {
     private WebElement confirmPass;
 
     @FindBy(name = "submitIdentity")
-    private WebElement saveBtn;
+    private WebElement save;
 
     @FindBy(xpath = "//p[@class='alert alert-success']")
     private WebElement personalInformationUpdateMessage;
@@ -86,3 +86,4 @@ public class MyAccountPage extends BasePageObject {
     public String getOrderReference() {return orderRef.getText();}
 
 }
+

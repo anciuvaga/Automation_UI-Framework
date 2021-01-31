@@ -1,4 +1,4 @@
-package utils;
+package actionsUtils;
 
 import com.cucumber.listener.Reporter;
 import com.google.common.io.Files;
@@ -21,17 +21,17 @@ public class TakeScreens {
     private String folderPath;
 
     public TakeScreens() {
-        folderPath = createScreenPath();
+        folderPath = createScreenShotPath();
     }
 
     public String getScreenPath() {
         if (folderPath == null) {
-            folderPath = createScreenPath();
+            folderPath = createScreenShotPath();
         }
         return folderPath;
     }
 
-    private String createScreenPath() {
+    private String createScreenShotPath() {
         try
         {
             DateFormat dateFormat = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");

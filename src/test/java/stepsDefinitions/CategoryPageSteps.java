@@ -1,13 +1,15 @@
 package stepsDefinitions;
 
+import actionsUtils.TakeScreens;
 import cucumber.api.java.en.When;
 import helpers.TestContext;
 import lombok.extern.log4j.Log4j;
 import pages.CategoryPage;
-import utils.TakeScreens;
+
+import static actionsUtils.Actions.clickOnElement;
 
 @Log4j
-public class CategoryPageSteps extends AbstractStepDefinitions{
+public class CategoryPageSteps {
 
     TestContext testContext;
     CategoryPage categoryPage;

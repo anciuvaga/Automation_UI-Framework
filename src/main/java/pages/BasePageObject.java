@@ -12,6 +12,4 @@ public abstract class BasePageObject {
        PageFactory.initElements(driver, this);
    }
 
-
-
 }

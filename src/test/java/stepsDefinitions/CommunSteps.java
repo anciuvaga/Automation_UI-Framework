@@ -1,29 +1,28 @@
 package stepsDefinitions;
 
 import cucumber.api.java.en.When;
-import helpers.CommunUtils;
 import helpers.TestContext;
 import lombok.extern.log4j.Log4j;
-import utils.TakeScreens;
-import webElementsEnum.WebElements;
+import actionsUtils.TakeScreens;
+
+import static helpers.ElementSearchUtils.getWebElementName;
 
 @Log4j
-public class CommunSteps extends CommunUtils {
+public class CommunSteps  {
 
     TestContext testContext;
     public CommunSteps(TestContext context) {
-        super(context);
         testContext = context;
     }
 
-    @When("^user clicks on '(.*)' generic button$")
-    public void userClicksOnButton(String element) {
-       getElement(WebElements.getByBusinessName(element).selector()).click();
-        TakeScreens.takeScreenshot(testContext.getWebDriverManager().getDriver(),
+    @When("^user clicks on '(.*)' generic button from '(.*)'$")
+    public void userClicksOnButton(String element, String currentPage)  {
+         getWebElementName(testContext, currentPage, element).click();
+         TakeScreens.takeScreenshot(testContext.getWebDriverManager().getDriver(),
                 testContext.getTakeScreens().getScreenPath());
         log.info("user clicks on " + element +  " generic button");
     }
-
 }
+
 
 

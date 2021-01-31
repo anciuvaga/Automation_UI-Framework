@@ -4,10 +4,10 @@ import helpers.TestContext;
 import cucumber.api.java.en.Given;
 import lombok.extern.log4j.Log4j;
 import pages.HomePage;
-import utils.TakeScreens;
+import actionsUtils.TakeScreens;
 
 @Log4j
-public class HomePageSteps extends AbstractStepDefinitions {
+public class HomePageSteps {
 
     TestContext testContext;
     HomePage homePage;

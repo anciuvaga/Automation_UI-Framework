@@ -4,8 +4,6 @@ import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -37,7 +35,7 @@ public class CheckoutPage extends BasePageObject {
     private WebElement checkMethod;
 
     @FindBy(xpath = "//button[@class='button btn btn-default button-medium']")
-    private WebElement confirmBtn;
+    private WebElement confirm;
 
     @FindBy(xpath = "//p[@class='alert alert-success']")
     private WebElement successMsgAlert;
@@ -48,8 +46,13 @@ public class CheckoutPage extends BasePageObject {
     @FindBy(xpath = "//div[@class='box order-confirmation']")
     private WebElement orderReference;
 
+    @FindBy(xpath = "//div[@class='shopping_cart']//span[@class='ajax_cart_quantity']")
+    private WebElement checkoutCart;
+
+    //div[@class='shopping_cart']//span[@class='ajax_cart_quantity']
+
     public CheckoutPage(WebDriver driver) {
-       super(driver);
+        super(driver);
     }
 
     public String getItemName() {
@@ -78,5 +81,13 @@ public class CheckoutPage extends BasePageObject {
             reference = matcher.group(0);
         }
         return reference;
+    }
+
+    public void completeCheckoutInformation() {
+        proceedToCheckoutCartBtn.click();
+        processAddressBtn.click();
+        termsOfServiceCheckbox.click();
+        processCarrierBtn.click();
+        checkMethod.click();
     }
 }

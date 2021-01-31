@@ -12,7 +12,7 @@ public class HomePage extends BasePageObject {
     WebDriver driver;
 
     @FindBy(xpath = "//a[@class='login']")
-    private WebElement signInBtn;
+    private WebElement signIn;
 
     @FindBy(xpath = "//a[@class='button ajax_add_to_cart_button btn btn-default']")
     private WebElement addToCartBtnHome;

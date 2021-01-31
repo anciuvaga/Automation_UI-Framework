@@ -4,22 +4,29 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import enums.Context;
 import helpers.TestContext;
+import actionsUtils.WaitUtils;
 import lombok.extern.log4j.Log4j;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import pages.CheckoutPage;
-import utils.TakeScreens;
+import actionsUtils.TakeScreens;
+
+import static actionsUtils.Actions.clickOnElement;
 
 @Log4j
-public class CheckOutPageSteps extends AbstractStepDefinitions{
+public class CheckOutPageSteps {
 
     TestContext testContext;
     CheckoutPage checkoutPage;
+    WaitUtils waitUtils;
 
     public CheckOutPageSteps(TestContext context) {
         testContext = context;
-        checkoutPage = testContext.getPageObjectManager().getCheckOutPage();
+        checkoutPage = testContext.getPageObjectManager().getCheckoutPage();
+        waitUtils = testContext.getWaitUtils();
+
     }
 
     @Then("^items are added to cart$")
@@ -43,7 +50,7 @@ public class CheckOutPageSteps extends AbstractStepDefinitions{
     public void corectItemsAmountIsPresentInTheShoppingCart() throws InterruptedException {
         Thread.sleep(2000);
         Actions act = new Actions(testContext.getWebDriverManager().getDriver());
-        testContext.waitForVisibilityOfElementLocated(By.xpath("//div[@class='shopping_cart']//span[@class='ajax_cart_quantity']"));
+        waitUtils.waitForVisibilityOfElementLocated(By.xpath("//div[@class='shopping_cart']//span[@class='ajax_cart_quantity']"));
         act.moveToElement(checkoutPage.getSummaryProductsQuantity()).perform();
         Assert.assertEquals("Item's amount is not: \"1\"", "1",
                 checkoutPage.getSummaryProductQuantityText());
@@ -54,11 +61,7 @@ public class CheckOutPageSteps extends AbstractStepDefinitions{
 
     @When("^user process checkout information$")
     public void userClickToProceedToCheckout() {
-        clickOnElement(checkoutPage.getProceedToCheckoutCartBtn());
-        clickOnElement(checkoutPage.getProcessAddressBtn());
-        clickOnElement(checkoutPage.getTermsOfServiceCheckbox());
-        clickOnElement(checkoutPage.getProcessCarrierBtn());
-        clickOnElement(checkoutPage.getCheckMethod());
+     checkoutPage.completeCheckoutInformation();
         TakeScreens.takeScreenshot(testContext.getWebDriverManager().getDriver(),
                 testContext.getTakeScreens().getScreenPath());
         log.info("User processes checkout information");
